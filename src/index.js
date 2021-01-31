@@ -7,10 +7,11 @@ const app = express();
 const PORT = 4000;
 const config = require('config');
 const mongoURI = config.mongoURI;
-const auth = require('./routes/auth');
+const authRoute = require('./routes/auth');
+const auth = require('./middleware/auth');
 
 app.use(bodyParser.json());
-app.use(auth);
+app.use(authRoute);
 
 mongoose.connect(mongoURI, {
 	useNewUrlParser: true,
@@ -26,8 +27,8 @@ mongoose.connection.error('error', (err) => {
 	console.error('Error connecting to mongodb', err);
 });
 
-app.get('/', (req, res) => {
-	res.send('Hi there!');
+app.get('/', auth, (req, res) => {
+	res.send(`Your email is ${req.user.email}`);
 });
 
 app.listen(PORT, () => {
