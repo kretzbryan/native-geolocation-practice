@@ -5,6 +5,9 @@ const app = express();
 const PORT = 4000;
 const config = require('config');
 const mongoURI = config.mongoURI;
+const auth = require('./routes/auth');
+
+app.use(auth);
 
 mongoose.connect(mongoURI, {
 	useNewUrlParser: true,
