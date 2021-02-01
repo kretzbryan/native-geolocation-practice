@@ -9,6 +9,10 @@ const TrackListScreen = ({ navigation }) => {
 				title='Go to track detail'
 				onPress={() => navigation.navigate('TrackDetail')}
 			/>
+			<Button
+				title='Go to signinFLow'
+				onPress={() => navigation.navigate('loginFlow')}
+			/>
 		</View>
 	);
 };
